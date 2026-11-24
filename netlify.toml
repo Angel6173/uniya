@@ -1,0 +1,15 @@
+# Configuración de Netlify (se lee sola al conectar el repositorio).
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# La app usa rutas del navegador (/mapa, /eventos/e-3…). Sin esta regla, recargar
+# o abrir un enlace directo daría 404: todas las rutas deben servir index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

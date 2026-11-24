@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-gradient-to-br from-primary-700 via-primary-600 to-sky-600 font-sans text-slate-900 antialiased;
+  }
+  /* Accesibilidad: foco SIEMPRE visible al navegar con teclado. */
+  :focus-visible {
+    outline: 3px solid #4f46e5;
+    outline-offset: 2px;
+  }
+  /* Respeta a quien pidió menos animaciones en su sistema operativo. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .animate-entrar {
+    animation: entrar 0.2s ease-out;
+  }
+  .animate-subir {
+    animation: subir 0.25s ease-out;
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── Marcadores del mapa (Leaflet) ───────────────────────────── */
+.marcador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.35);
+  transition: transform 0.15s;
+}
+.marcador--activo {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.45), 0 2px 8px rgba(15, 23, 42, 0.4);
+}
+.marcador--puerta {
+  background: #0f172a;
+}
+.leaflet-container {
+  font-family: inherit;
+}
+.leaflet-marker-icon:focus-visible {
+  outline: 3px solid #4f46e5;
+  outline-offset: 2px;
+  border-radius: 9999px;
+}
